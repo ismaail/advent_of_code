@@ -38,7 +38,7 @@ class InstructionParser
      */
     public function parse($source)
     {
-        array_map([$this, 'process'],  explode(PHP_EOL, trim($source)));
+        array_map([$this, 'process'], explode(PHP_EOL, trim($source)));
     }
 
     /**

@@ -28,5 +28,4 @@ class Play implements Playable
             $parser->getTotalRibbon()
         );
     }
-
 }
