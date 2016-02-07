@@ -66,7 +66,7 @@ EOF;
         $this->assertEquals($parser->getTotalArea(), 2);
     }
 
-    public function test_total_parser_calculate_throw_exception_if_wrong_number_of_dimensions()
+    public function test_total_parser_throw_exception_if_wrong_number_of_dimensions()
     {
         $mock = $this
             ->getMockBuilder(\Puzzle\Day2\Present::class)
