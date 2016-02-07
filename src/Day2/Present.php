@@ -17,13 +17,26 @@ class Present
     {
         sort($dimensions);
 
-        $area = (
+        return (
             ($dimensions[0] * $dimensions[1] * 2) +
             ($dimensions[0] * $dimensions[2] * 2) +
             ($dimensions[1] * $dimensions[2] * 2) +
             ($dimensions[0] * $dimensions[1])
         );
+    }
 
-        return $area;
+    /**
+     * @param array $dimensions
+     *
+     * @return int
+     */
+    public function getRibbon(array $dimensions)
+    {
+        sort($dimensions);
+
+        return (
+            (($dimensions[0] + $dimensions[1]) * 2) +
+            ($dimensions[0] * $dimensions[1] * $dimensions[2])
+        );
     }
 }
