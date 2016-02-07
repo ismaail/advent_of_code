@@ -20,9 +20,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $this->assertInstanceOf(InstructionParser::class, $reader);
+        $this->assertInstanceOf(InstructionParser::class, $parser);
     }
 
     public function test_parser_call_elevator_go_up_method()
@@ -44,9 +44,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $reader->parse('(');
+        $parser->parse('(');
     }
 
     public function test_parser_call_elevator_go_down_method()
@@ -68,9 +68,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $reader->parse(')');
+        $parser->parse(')');
     }
 
     public function test_throw_excepion_if_parsing_invalide_instruction()
@@ -92,10 +92,10 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $reader->parse('|o|');
+        $parser->parse('|o|');
     }
 }
