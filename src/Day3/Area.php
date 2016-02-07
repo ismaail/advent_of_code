@@ -43,7 +43,7 @@ class Area implements \ArrayAccess, \Countable
             throw new \InvalidArgumentException("Invalid offset, must be follow this format 'x,y' string");
         }
 
-        if (! $value instanceOf House) {
+        if (! $value instanceof House) {
             throw new \InvalidArgumentException(sprintf("Expecting House class instance, got a %s", gettype($value)));
         }
 

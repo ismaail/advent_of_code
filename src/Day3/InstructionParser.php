@@ -35,6 +35,9 @@ class InstructionParser
         $this->area[$this->positionToOffset()] = $startHouse;
     }
 
+    /**
+     * @return string
+     */
     private function positionToOffset()
     {
         return sprintf('%d,%d', $this->santa->getPositionX(), $this->santa->getPositionY());
@@ -48,6 +51,9 @@ class InstructionParser
         array_map([$this, 'process'], str_split(trim($source)));
     }
 
+    /**
+     * @param $direction
+     */
     private function process($direction)
     {
         switch ($direction) {

@@ -10,6 +10,9 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    /**
+     * @return string
+     */
     public function play()
     {
         $area = new Area();
