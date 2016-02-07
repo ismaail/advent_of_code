@@ -22,7 +22,11 @@ class Play implements Playable
 
         $parser->parse(file_get_contents(__DIR__ . $file));
 
-        return sprintf('Total area for all presents: %d', $parser->getTotalArea());
+        return sprintf(
+            'Total area for all presents: %d feet, which need %d feet of ribbon',
+            $parser->getTotalArea(),
+            $parser->getTotalRibbon()
+        );
     }
 
 }
