@@ -36,7 +36,7 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
 
         $parser = new InstructionParser($mock);
 
-        $this->assertEquals($parser->getTotalArea(), 0);
+        $this->assertSame(0, $parser->getTotalArea());
     }
 
     public function test_total_parser_calculate_total_area()
