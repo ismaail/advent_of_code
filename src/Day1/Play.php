@@ -22,6 +22,10 @@ class Play implements Playable
 
         $parser->parse(file_get_contents(__DIR__ . $file));
 
-        return sprintf("Elevator is at floor #%d.\n", $elevator->getFloor());
+        return sprintf(
+            "Elevator is at floor #%d. Entered Basement at %d char.",
+            $elevator->getFloor(),
+            $parser->getEnterdBasementAt()
+        );
     }
 }

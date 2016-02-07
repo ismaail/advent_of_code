@@ -38,4 +38,14 @@ class Elevator
     {
         $this->floor--;
     }
+
+    /**
+     * Check if current Floor is the Basement.
+     *
+     * @return bool
+     */
+    public function isBasement()
+    {
+        return (-1 === $this->floor);
+    }
 }

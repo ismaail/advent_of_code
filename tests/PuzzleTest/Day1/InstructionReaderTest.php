@@ -20,9 +20,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $this->assertInstanceOf(InstructionParser::class, $reader);
+        $this->assertInstanceOf(InstructionParser::class, $parser);
     }
 
     public function test_parser_call_elevator_go_up_method()
@@ -44,9 +44,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $reader->parse('(');
+        $parser->parse('(');
     }
 
     public function test_parser_call_elevator_go_down_method()
@@ -68,9 +68,9 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
-        $reader->parse(')');
+        $parser->parse(')');
     }
 
     public function test_throw_excepion_if_parsing_invalide_instruction()
@@ -92,10 +92,40 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
             ->method('goDown')
         ;
 
-        $reader = new InstructionParser($mock);
+        $parser = new InstructionParser($mock);
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $reader->parse('|o|');
+        $parser->parse('|o|');
+    }
+
+    public function test_init_basement_is_null()
+    {
+        $mock = $this
+            ->getMockBuilder(Elevator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock()
+        ;
+
+        $parser = new InstructionParser($mock);
+
+        $this->assertNull($parser->getEnterdBasementAt());
+    }
+
+    public function test_basement_entered_at_correct_char()
+    {
+        $mock = $this
+            ->getMockBuilder(Elevator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock()
+        ;
+
+        $parser = new InstructionParser($mock);
+        $parser->parse('())((');
+
+        $this->assertEquals(1, $mock->getFloor(), 'Wrong Floor');
+        $this->assertEquals(3, $parser->getEnterdBasementAt(), 'Wrong Basement value');
     }
 }
