@@ -33,7 +33,7 @@ class InstructionParser
      */
     public function parse($source)
     {
-        array_map([$this, 'process'],  explode(PHP_EOL, $source));
+        array_map([$this, 'process'],  explode(PHP_EOL, trim($source)));
     }
 
     /**
@@ -41,10 +41,6 @@ class InstructionParser
      */
     private function process($input)
     {
-        if (empty($input)) {
-            return;
-        }
-
         $dimension = explode('x', $input);
 
         if (3 !== count($dimension)) {
