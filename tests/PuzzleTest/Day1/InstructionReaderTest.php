@@ -98,4 +98,34 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
 
         $parser->parse('|o|');
     }
+
+    public function test_init_basement_is_null()
+    {
+        $mock = $this
+            ->getMockBuilder(Elevator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock()
+        ;
+
+        $parser = new InstructionParser($mock);
+
+        $this->assertNull($parser->getEnterdBasementAt());
+    }
+
+    public function test_basement_entered_at_correct_char()
+    {
+        $mock = $this
+            ->getMockBuilder(Elevator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock()
+        ;
+
+        $parser = new InstructionParser($mock);
+        $parser->parse('())((');
+
+        $this->assertEquals(1, $mock->getFloor(), 'Wrong Floor');
+        $this->assertEquals(3, $parser->getEnterdBasementAt(), 'Wrong Basement value');
+    }
 }
