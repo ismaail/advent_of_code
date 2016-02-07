@@ -15,12 +15,6 @@ class Present
      */
     public function getArea(array $dimensions)
     {
-        if (3 !== count($dimensions)) {
-            throw new \InvalidArgumentException(
-                sprintf("Gift expected to have 3 dimensions, but has %d", count($dimensions))
-            );
-        }
-
         sort($dimensions);
 
         $area = (

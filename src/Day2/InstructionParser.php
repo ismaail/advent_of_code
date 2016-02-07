@@ -47,6 +47,11 @@ class InstructionParser
 
         $dimension = explode('x', $input);
 
+        if (3 !== count($dimension)) {
+            throw new \InvalidArgumentException(
+                sprintf("Gift expected to have 3 dimensions, but has %d", count($dimension))
+            );
+        }
         $this->totalArea += $this->present->getArea($dimension);
     }
 
