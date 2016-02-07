@@ -79,6 +79,7 @@ EOF;
 1x10x1
 2x4x3
 1x5
+
 EOF;
 
         $this->expectException(\InvalidArgumentException::class);
