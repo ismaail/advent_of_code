@@ -19,6 +19,11 @@ class InstructionParser
     private $totalArea = 0;
 
     /**
+     * @var
+     */
+    private $totalRibbon = 0;
+
+    /**
      * InstructionParser constructor.
      *
      * @param Present $present
@@ -48,7 +53,9 @@ class InstructionParser
                 sprintf("Gift expected to have 3 dimensions, but has %d", count($dimension))
             );
         }
+
         $this->totalArea += $this->present->getArea($dimension);
+        $this->totalRibbon += $this->present->getRibbon($dimension);
     }
 
     /**
@@ -57,5 +64,13 @@ class InstructionParser
     public function getTotalArea()
     {
         return $this->totalArea;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalRibbon()
+    {
+        return $this->totalRibbon;
     }
 }

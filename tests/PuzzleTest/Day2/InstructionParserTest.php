@@ -87,4 +87,50 @@ EOF;
         $parser = new InstructionParser($mock);
         $result = $parser->parse($data);
     }
+
+    public function test_total_ribbon_init_value()
+    {
+        $mock = $this
+            ->getMockBuilder(\Puzzle\Day2\Present::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getRibbon'])
+            ->getMock()
+        ;
+
+        $mock
+            ->expects($this->never())
+            ->method('getARibbon')
+        ;
+
+        $parser = new InstructionParser($mock);
+
+        $this->assertSame(0, $parser->getTotalRibbon());
+    }
+
+    public function test_total_parser_calculate_total_ribbon()
+    {
+        $mock = $this
+            ->getMockBuilder(\Puzzle\Day2\Present::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getRibbon'])
+            ->getMock()
+        ;
+
+        $mock
+            ->expects($this->exactly(2))
+            ->method('getRibbon')
+            ->will($this->returnValue(1))
+        ;
+
+        $data = <<<EOF
+1x10x1
+2x4x3
+
+EOF;
+
+        $parser = new InstructionParser($mock);
+        $result = $parser->parse($data);
+
+        $this->assertEquals($parser->getTotalRibbon(), 2);
+    }
 }
