@@ -44,4 +44,28 @@ class ElevatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(-1, $this->elevator->getFloor());
     }
+
+    public function test_is_basement_init_false()
+    {
+        $this->assertFalse($this->elevator->isBasement());
+    }
+
+    public function test_is_basement_is_true_after_working_elevator()
+    {
+        $this->elevator->goUp();
+        $this->elevator->goDown();
+        $this->elevator->goDown();
+
+        $this->assertTrue($this->elevator->isBasement());
+    }
+
+    public function test_is_basement_is_false_after_working_elevator()
+    {
+        $this->elevator->goUp();
+        $this->elevator->goDown();
+        $this->elevator->goDown();
+        $this->elevator->goDown();
+
+        $this->assertFalse($this->elevator->isBasement());
+    }
 }
