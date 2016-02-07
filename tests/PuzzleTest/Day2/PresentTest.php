@@ -33,17 +33,32 @@ class PresentTest extends \PHPUnit_Framework_TestCase
     {
         $area = $this->present->getArea($input);
 
-        $this->assertEquals($expected, $area);
+        $this->assertEquals($expected['area'], $area, 'Wrong calculated area value');
+    }
+
+    /**
+     * @param array $expected
+     * @param array $input
+     *
+     * @dataProvider getDimensions
+     */
+    public function test_calculate_ribbon($expected, $input)
+    {
+        $ribbon = $this->present->getRibbon($input);
+
+        $this->assertEquals($expected['ribbon'], $ribbon, 'Wrong calculated ribbon value');
     }
 
     public function getDimensions()
     {
         return [
             [
-                43, [ 1, 10, 1 ]
+                ['area' => 43, 'ribbon' => 14],
+                [ 1, 10, 1 ]
             ],
             [
-                58, [ 4, 2, 3 ]
+                ['area' => 58, 'ribbon' => 34],
+                [ 4, 2, 3 ]
             ],
         ];
     }

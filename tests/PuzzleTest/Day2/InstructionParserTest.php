@@ -36,7 +36,7 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
 
         $parser = new InstructionParser($mock);
 
-        $this->assertEquals($parser->getTotalArea(), 0);
+        $this->assertSame(0, $parser->getTotalArea());
     }
 
     public function test_total_parser_calculate_total_area()
@@ -66,7 +66,7 @@ EOF;
         $this->assertEquals($parser->getTotalArea(), 2);
     }
 
-    public function test_total_parser_calculate_throw_exception_if_wrong_number_of_dimensions()
+    public function test_total_parser_throw_exception_if_wrong_number_of_dimensions()
     {
         $mock = $this
             ->getMockBuilder(\Puzzle\Day2\Present::class)
@@ -79,11 +79,58 @@ EOF;
 1x10x1
 2x4x3
 1x5
+
 EOF;
 
         $this->expectException(\InvalidArgumentException::class);
 
         $parser = new InstructionParser($mock);
         $result = $parser->parse($data);
+    }
+
+    public function test_total_ribbon_init_value()
+    {
+        $mock = $this
+            ->getMockBuilder(\Puzzle\Day2\Present::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getRibbon'])
+            ->getMock()
+        ;
+
+        $mock
+            ->expects($this->never())
+            ->method('getARibbon')
+        ;
+
+        $parser = new InstructionParser($mock);
+
+        $this->assertSame(0, $parser->getTotalRibbon());
+    }
+
+    public function test_total_parser_calculate_total_ribbon()
+    {
+        $mock = $this
+            ->getMockBuilder(\Puzzle\Day2\Present::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getRibbon'])
+            ->getMock()
+        ;
+
+        $mock
+            ->expects($this->exactly(2))
+            ->method('getRibbon')
+            ->will($this->returnValue(1))
+        ;
+
+        $data = <<<EOF
+1x10x1
+2x4x3
+
+EOF;
+
+        $parser = new InstructionParser($mock);
+        $result = $parser->parse($data);
+
+        $this->assertEquals($parser->getTotalRibbon(), 2);
     }
 }

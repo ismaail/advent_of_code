@@ -19,6 +19,11 @@ class InstructionParser
     private $totalArea = 0;
 
     /**
+     * @var
+     */
+    private $totalRibbon = 0;
+
+    /**
      * InstructionParser constructor.
      *
      * @param Present $present
@@ -33,7 +38,7 @@ class InstructionParser
      */
     public function parse($source)
     {
-        array_map([$this, 'process'],  explode(PHP_EOL, $source));
+        array_map([$this, 'process'],  explode(PHP_EOL, trim($source)));
     }
 
     /**
@@ -41,13 +46,16 @@ class InstructionParser
      */
     private function process($input)
     {
-        if (empty($input)) {
-            return;
-        }
-
         $dimension = explode('x', $input);
 
+        if (3 !== count($dimension)) {
+            throw new \InvalidArgumentException(
+                sprintf("Gift expected to have 3 dimensions, but has %d", count($dimension))
+            );
+        }
+
         $this->totalArea += $this->present->getArea($dimension);
+        $this->totalRibbon += $this->present->getRibbon($dimension);
     }
 
     /**
@@ -56,5 +64,13 @@ class InstructionParser
     public function getTotalArea()
     {
         return $this->totalArea;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalRibbon()
+    {
+        return $this->totalRibbon;
     }
 }
