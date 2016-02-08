@@ -16,6 +16,13 @@
     <filter>
         <whitelist>
             <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory suffix=".php">src/Console/</directory>
+                <file>src/Playable.php</file>
+                <file>src/Day1/Play.php</file>
+                <file>src/Day2/Play.php</file>
+                <file>src/Day3/Play.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <php>
