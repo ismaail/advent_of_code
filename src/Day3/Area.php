@@ -40,7 +40,7 @@ class Area implements \ArrayAccess, \Countable
     public function offsetSet($offset, $value)
     {
         if (! $this->isOffsetValid($offset)) {
-            throw new \InvalidArgumentException("Invalid offset, must be follow this format 'x,y' string");
+            throw new \InvalidArgumentException("Invalid offset value, must follow this format 'x,y' string");
         }
 
         if (! $value instanceof House) {
