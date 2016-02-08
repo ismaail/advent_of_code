@@ -3,9 +3,9 @@
 namespace Puzzle\Day3;
 
 /**
- * Class Santa
+ * Class RoboSanta
  * @package Puzzle\Day3
  */
-class Santa extends AbstractSanta
+class RoboSanta extends AbstractSanta
 {
 }
