@@ -19,28 +19,40 @@ class InstructionParser
     private $santa;
 
     /**
+     * @var AbstractSanta
+     */
+    private $roboSanta;
+
+    /**
      * InstructionParser constructor.
      *
      * @param Area $area
-     * @param Santa $santa
+     * @param AbstractSanta $santa
+     * @param AbstractSanta $roboSanta
      */
-    public function __construct(Area $area, Santa $santa)
+    public function __construct(Area $area, AbstractSanta $santa, AbstractSanta $roboSanta)
     {
         $this->area = $area;
         $this->santa = $santa;
+        $this->roboSanta = $roboSanta;
 
+        // Add the House at Santa's position to the Area houses list.
         $startHouse = new House();
-        $startHouse->givePresent();
+        $this->area[$this->positionToOffset($santa)] = $startHouse;
 
-        $this->area[$this->positionToOffset()] = $startHouse;
+        // Both Santa & RoboSanta will give a Present to this House.
+        $santa->givePresent($startHouse);
+        $roboSanta->givePresent($startHouse);
     }
 
     /**
+     * @param AbstractSanta $distributor
+     *
      * @return string
      */
-    private function positionToOffset()
+    private function positionToOffset(AbstractSanta $distributor)
     {
-        return sprintf('%d,%d', $this->santa->getPositionX(), $this->santa->getPositionY());
+        return sprintf('%d,%d', $distributor->getPositionX(), $distributor->getPositionY());
     }
 
     /**
@@ -48,47 +60,62 @@ class InstructionParser
      */
     public function parse($source)
     {
-        array_map([$this, 'process'], str_split(trim($source)));
+        $directions = str_split(trim($source));
+
+        array_map([$this, 'process'], array_keys($directions), $directions);
     }
 
     /**
-     * @param $direction
+     * @param int $index
+     * @param string $direction
      */
-    private function process($direction)
+    private function process($index, $direction)
     {
+        $distributor = $this->getCurrentDistributor($index);
+
         switch ($direction) {
             case '^':
-                $this->santa->moveNorth();
+                $distributor->moveNorth();
                 break;
 
             case '>':
-                $this->santa->moveEast();
+                $distributor->moveEast();
                 break;
 
             case 'v':
-                $this->santa->moveSouth();
+                $distributor->moveSouth();
                 break;
 
             case '<':
-                $this->santa->moveWest();
+                $distributor->moveWest();
                 break;
 
             default:
                 throw new \InvalidArgumentException("Invalid direction is given.");
         }
 
-        $this->giveNewPresent();
+        $this->giveNewPresent($distributor);
     }
 
     /**
-     * Santa Gives the house at his current position a new Present.
+     * Who's turn to move and give Presents.
+     *
+     * @param int $index
      */
-    private function giveNewPresent()
+    private function getCurrentDistributor($index)
     {
-        $position = $this->positionToOffset();
+        return (0 === $index % 2) ? $this->santa : $this->roboSanta;
+    }
 
-        $house = $this->area->getOrCreate($position);
+    /**
+     * Give the house at this position a new Present.
+     *
+     * @param AbstractSanta $distributor
+     */
+    private function giveNewPresent(AbstractSanta $distributor)
+    {
+        $house = $this->area->getOrCreate($this->positionToOffset($distributor));
 
-        $house->givePresent();
+        $distributor->givePresent($house);
     }
 }
