@@ -77,15 +77,11 @@ class Area implements \ArrayAccess, \Countable
             return false;
         }
 
-        $patter = '/^(-?\d+,-?\d+)$/';
+        $pattern = '/^(-?\d+,-?\d+)$/';
 
-        preg_match($patter, $offset, $matches);
+        preg_match($pattern, $offset, $matches);
 
-        if (! $matches) {
-            return false;
-        }
-
-        return true;
+        return !empty($matches);
     }
 
     /**
