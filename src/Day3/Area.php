@@ -40,7 +40,7 @@ class Area implements \ArrayAccess, \Countable
     public function offsetSet($offset, $value)
     {
         if (! $this->isOffsetValid($offset)) {
-            throw new \InvalidArgumentException("Invalid offset, must be follow this format 'x,y' string");
+            throw new \InvalidArgumentException("Invalid offset value, must follow this format 'x,y' string");
         }
 
         if (! $value instanceof House) {
@@ -77,15 +77,11 @@ class Area implements \ArrayAccess, \Countable
             return false;
         }
 
-        $patter = '/^(-?\d+,-?\d+)$/';
+        $pattern = '/^(-?\d+,-?\d+)$/';
 
-        preg_match($patter, $offset, $matches);
+        preg_match($pattern, $offset, $matches);
 
-        if (! $matches) {
-            return false;
-        }
-
-        return true;
+        return !empty($matches);
     }
 
     /**

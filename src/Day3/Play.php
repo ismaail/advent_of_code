@@ -17,8 +17,9 @@ class Play implements Playable
     {
         $area = new Area();
         $santa = new Santa();
+        $roboSanta = new RoboSanta();
 
-        $parser = new InstructionParser($area, $santa);
+        $parser = new InstructionParser($area, $santa, $roboSanta);
 
         $file = '/../../data/instructions/day3.dat';
 

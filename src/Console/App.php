@@ -37,6 +37,10 @@ class App extends Command
     {
         $day = $input->getArgument('day');
 
+        if (! is_numeric($day)) {
+            throw new InvalidArgumentException(sprintf("Day must be an Integer, but got a %s.", gettype($day)));
+        }
+
         $io = new SymfonyStyle($input, $output);
 
         $result = $this->play($day);
