@@ -22,6 +22,7 @@
                 <file>src/Day1/Play.php</file>
                 <file>src/Day2/Play.php</file>
                 <file>src/Day3/Play.php</file>
+                <file>src/Day4/Play.php</file>
             </exclude>
         </whitelist>
     </filter>
