@@ -19,7 +19,7 @@ class InstructionParser
     private $santa;
 
     /**
-     * @var AbstractSanta
+     * @var RoboSanta
      */
     private $roboSanta;
 
