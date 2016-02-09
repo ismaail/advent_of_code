@@ -3,6 +3,7 @@
 namespace Puzzle\Day1;
 
 use Puzzle\Playable;
+use Puzzle\FileRead;
 
 /**
  * Class Play
@@ -10,6 +11,8 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    use FileRead;
+
     /**
      * @return string
      */
@@ -18,9 +21,7 @@ class Play implements Playable
         $elevator = new Elevator();
         $parser = new InstructionParser($elevator);
 
-        $file = '/../../data/instructions/day1.dat';
-
-        $parser->parse(file_get_contents(__DIR__ . $file));
+        $parser->parse($this->read(1));
 
         return sprintf(
             "Elevator is at floor #%d. Entered Basement at %d char.",

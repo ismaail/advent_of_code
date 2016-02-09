@@ -3,6 +3,7 @@
 namespace Puzzle\Day4;
 
 use Puzzle\Playable;
+use Puzzle\FileRead;
 
 /**
  * Class Play
@@ -10,6 +11,8 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    use FileRead;
+
     /**
      * @return bool|int
      */
@@ -17,8 +20,6 @@ class Play implements Playable
     {
         $parser = new InstructionParser(new Md5Hasher());
 
-        $file = '/../../data/instructions/day4.dat';
-
-        return $parser->parse(file_get_contents(__DIR__ . $file));
+        return $parser->parse($this->read(4));
     }
 }

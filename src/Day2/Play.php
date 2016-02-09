@@ -3,6 +3,7 @@
 namespace Puzzle\Day2;
 
 use Puzzle\Playable;
+use Puzzle\FileRead;
 
 /**
  * Class Play
@@ -10,6 +11,8 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    use FileRead;
+
     /**
      * @return string
      */
@@ -18,9 +21,7 @@ class Play implements Playable
         $present = new Present();
         $parser = new InstructionParser($present);
 
-        $file = '/../../data/instructions/day2.dat';
-
-        $parser->parse(file_get_contents(__DIR__ . $file));
+        $parser->parse($this->read(2));
 
         return sprintf(
             'Total area for all presents: %d feet, which need %d feet of ribbon',

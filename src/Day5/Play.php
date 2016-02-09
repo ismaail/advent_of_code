@@ -3,6 +3,7 @@
 namespace Puzzle\Day5;
 
 use Puzzle\Playable;
+use Puzzle\FileRead;
 
 /**
  * Class Play
@@ -10,6 +11,8 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    use FileRead;
+
     /**
      * @return string
      */
@@ -17,9 +20,7 @@ class Play implements Playable
     {
         $parser = new InstructionParser(new WordFilter());
 
-        $file = '/../../data/instructions/day5.dat';
-
-        $parser->parse(file_get_contents(__DIR__ . $file));
+        $parser->parse($this->read(5));
 
         return sprintf('Number of nice words: %d words.', $parser->getNiceWords());
     }

@@ -3,6 +3,7 @@
 namespace Puzzle\Day3;
 
 use Puzzle\Playable;
+use Puzzle\FileRead;
 
 /**
  * Class Play
@@ -10,6 +11,8 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    use FileRead;
+
     /**
      * @return string
      */
@@ -21,9 +24,7 @@ class Play implements Playable
 
         $parser = new InstructionParser($area, $santa, $roboSanta);
 
-        $file = '/../../data/instructions/day3.dat';
-
-        $parser->parse(file_get_contents(__DIR__ . $file));
+        $parser->parse($this->read(3));
 
         return sprintf('Total houses visited by Santa: %d house', count($area));
     }
