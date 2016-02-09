@@ -111,7 +111,10 @@ class WordFilterTest extends \PHPUnit_Framework_TestCase
     public function words()
     {
         return [
-            [true, 'ugknbfddgicrmopn'],
+            [true, 'qjhvhtzxzqqjkmpb'],
+            [true, 'xxyxx'],
+            [false, 'uurcxstgmygtbstg'],
+            [false, 'ieodomkazucvgmuy'],
         ];
     }
 

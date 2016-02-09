@@ -19,11 +19,7 @@ class WordFilter
             throw new \InvalidArgumentException(sprintf('Word Filter accepts only string but got %s', gettype($word)));
         }
 
-        return (
-            $this->hasVowels($word)
-            && $this->hasDoubleLetter($word)
-            && ! $this->hasBadWords($word)
-        );
+        return ($this->hasTwoLettersPair($word) && $this->hasOneLetterPairDivider($word));
     }
 
     /**
