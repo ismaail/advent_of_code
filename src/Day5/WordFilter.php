@@ -75,4 +75,36 @@ class WordFilter
 
         return !empty($matches[0]);
     }
+
+    /**
+     * Check if word contains two letters that appear at least twice.
+     *
+     * @param string $word
+     *
+     * @return bool
+     */
+    private function hasTwoLettersPair($word)
+    {
+        $pattern = '/(\w{2}).*(\1)/';
+
+        preg_match_all($pattern, $word, $matches);
+
+        return !empty($matches[0]);
+    }
+
+    /**
+     * Check if word contains at least one letter which repeat with one letter between them.
+     *
+     * @param string $word
+     *
+     * @return bool
+     */
+    private function hasOneLetterPairDivider($word)
+    {
+        $pattern = '/(\w{1})(\w{1})(\1)/';
+
+        preg_match_all($pattern, $word, $matches);
+
+        return !empty($matches[0]);
+    }
 }

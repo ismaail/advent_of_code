@@ -112,10 +112,65 @@ class WordFilterTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [true, 'ugknbfddgicrmopn'],
+        ];
+    }
+
+    /**
+     * @param bool $assert
+     * @param string $word
+     *
+     * @dataProvider twoLettersPairwords
+     */
+    public function test_word_has_two_letters_pair($assert, $word)
+    {
+        $reflectedMethod = new \ReflectionMethod(WordFilter::class, 'hasTwoLettersPair');
+        $reflectedMethod->setAccessible(true);
+
+        $this->assertEquals($assert, $reflectedMethod->invoke(new WordFilter(), $word));
+    }
+
+    /**
+     * @return array
+     */
+    public function twoLettersPairwords()
+    {
+        return [
+            [true, 'xyxy'],
+            [true, 'aabcdefgaa'],
+            [true, 'aabcfgaahiaa'],
+            [false, 'aaa'],
+            [false, 'aba'],
+            [false, 'bacdefgab'],
+        ];
+    }
+
+    /**
+     * @param bool $assert
+     * @param string $word
+     *
+     * @dataProvider oneLetterPairDividerWords
+     */
+    public function test_word_has_one_letter_pair_divider($assert, $word)
+    {
+        $reflectedMethod = new \ReflectionMethod(WordFilter::class, 'hasOneLetterPairDivider');
+        $reflectedMethod->setAccessible(true);
+
+        $this->assertEquals($assert, $reflectedMethod->invoke(new WordFilter(), $word));
+    }
+
+    /**
+     * @return array
+     */
+    public function oneLetterPairDividerWords()
+    {
+        return [
+            [true, 'xyx'],
+            [true, 'xxyxx'],
+            [true, 'abcdefeghi'],
             [true, 'aaa'],
-            [false, 'jchzalrnumimnmhp'],
-            [false, 'haegwjzuvuyypxyu'],
-            [false, 'dvszwmarrgswjxmb'],
+            [false, 'xxyy'],
+            [false, 'aa'],
+            [false, 'abcdef'],
         ];
     }
 }
