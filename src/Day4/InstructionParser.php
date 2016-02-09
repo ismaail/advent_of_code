@@ -62,6 +62,6 @@ class InstructionParser
      */
     public function isCorrect($answer)
     {
-        return '00000' ===substr($answer, 0, 5);
+        return '000000' ===substr($answer, 0, 6);
     }
 }
