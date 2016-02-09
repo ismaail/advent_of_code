@@ -50,7 +50,7 @@ class InstructionParser
     {
         $i = 0;
 
-        while(true) {
+        while (true) {
             yield $this->hasher->hash($input . $i++);
         }
     }
@@ -62,6 +62,6 @@ class InstructionParser
      */
     public function isCorrect($answer)
     {
-        return '000000' ===substr($answer, 0, 6);
+        return '000000' === substr($answer, 0, 6);
     }
 }

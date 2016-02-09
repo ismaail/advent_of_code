@@ -10,6 +10,9 @@ use Puzzle\Playable;
  */
 class Play implements Playable
 {
+    /**
+     * @return bool|int
+     */
     public function play()
     {
         $parser = new InstructionParser(new Md5Hasher());
