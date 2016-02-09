@@ -19,11 +19,7 @@ class WordFilter
             throw new \InvalidArgumentException(sprintf('Word Filter accepts only string but got %s', gettype($word)));
         }
 
-        return (
-            $this->hasVowels($word)
-            && $this->hasDoubleLetter($word)
-            && ! $this->hasBadWords($word)
-        );
+        return ($this->hasTwoLettersPair($word) && $this->hasOneLetterPairDivider($word));
     }
 
     /**
@@ -70,6 +66,38 @@ class WordFilter
     private function hasBadWords($word)
     {
         $pattern = '/(ab|cd|pq|xy)/i';
+
+        preg_match_all($pattern, $word, $matches);
+
+        return !empty($matches[0]);
+    }
+
+    /**
+     * Check if word contains two letters that appear at least twice.
+     *
+     * @param string $word
+     *
+     * @return bool
+     */
+    private function hasTwoLettersPair($word)
+    {
+        $pattern = '/(\w{2}).*(\1)/';
+
+        preg_match_all($pattern, $word, $matches);
+
+        return !empty($matches[0]);
+    }
+
+    /**
+     * Check if word contains at least one letter which repeat with one letter between them.
+     *
+     * @param string $word
+     *
+     * @return bool
+     */
+    private function hasOneLetterPairDivider($word)
+    {
+        $pattern = '/(\w{1})(\w{1})(\1)/';
 
         preg_match_all($pattern, $word, $matches);
 
