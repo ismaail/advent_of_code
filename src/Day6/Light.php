@@ -10,31 +10,42 @@ class Light
 {
     /**
      * @const bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     const STATUS_OFF = false;
 
     /**
      * @const bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     const STATUS_ON = true;
 
     /**
      * @var int
+     *
+     * @deprecated  Light Status no longer used.
      */
     private $status = self::STATUS_OFF;
 
     /**
      * @var int
      */
-    private $positionX = 0;
+    private $brightness = 0;
 
     /**
-     * @var int
+     * @return int
      */
-    private $positionY = 0;
+    public function getBrightness()
+    {
+        return $this->brightness;
+    }
 
     /**
      * @return bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     public function isOn()
     {
@@ -43,6 +54,8 @@ class Light
 
     /**
      * @return bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     public function isOff()
     {
@@ -50,42 +63,33 @@ class Light
     }
 
     /**
+     * Increase Light Brightness by 1.
+     *
      * Turn light ON
      */
     public function turnOn()
     {
-        $this->status = self::STATUS_ON;
+        $this->brightness++;
     }
 
     /**
+     * Decrease Light Brightness by 1 with a minimum of 0.
+     *
      * Turn light Off
      */
     public function turnOff()
     {
-        $this->status = self::STATUS_OFF;
+        if ($this->brightness > 0) {
+            $this->brightness--;
+        }
     }
 
     /**
+     * Increase Light Brightness by 2.
      * Toggle light
      */
     public function toggle()
     {
-        $this->status = !$this->status;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPositionX()
-    {
-        return $this->positionX;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPositionY()
-    {
-        return $this->positionY;
+        $this->brightness += 2;
     }
 }

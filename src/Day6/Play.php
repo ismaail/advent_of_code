@@ -26,15 +26,13 @@ class Play implements Playable
         $source = $this->read(6);
         $parser->parse($source);
 
-        $lightsOn = 0;
+        $totalBrightness = 0;
 
         /** @var Light $light */
         foreach ($lightGrid as $light) {
-            if ($light->isOn()) {
-                $lightsOn++;
-            }
+            $totalBrightness += $light->getBrightness();
         }
 
-        return sprintf("The number of lights that are lit: %d light.", $lightsOn);
+        return sprintf("Total brightness of all lights: %d", $totalBrightness);
     }
 }

@@ -20,7 +20,7 @@ class LightGrid extends BaseGrid
 
     /**
      * @param string $offset
-     * @param House $value
+     * @param $value
      */
     public function offsetSet($offset, $value)
     {
@@ -41,6 +41,8 @@ class LightGrid extends BaseGrid
      * @param string $offset
      *
      * @return Light
+     *
+     * @todo PHPCS Fix method name
      */
     public function offsetGetorCreate($offset)
     {
