@@ -30,6 +30,19 @@ class Light
     private $status = self::STATUS_OFF;
 
     /**
+     * @var int
+     */
+    private $brightness = 0;
+
+    /**
+     * @return int
+     */
+    public function getBrightness()
+    {
+        return $this->brightness;
+    }
+
+    /**
      * @return bool
      *
      * @deprecated  Light Status no longer used.
@@ -50,26 +63,33 @@ class Light
     }
 
     /**
+     * Increase Light Brightness by 1.
+     *
      * Turn light ON
      */
     public function turnOn()
     {
-        $this->status = self::STATUS_ON;
+        $this->brightness++;
     }
 
     /**
+     * Decrease Light Brightness by 1 with a minimum of 0.
+     *
      * Turn light Off
      */
     public function turnOff()
     {
-        $this->status = self::STATUS_OFF;
+        if ($this->brightness > 0) {
+            $this->brightness--;
+        }
     }
 
     /**
+     * Increase Light Brightness by 2.
      * Toggle light
      */
     public function toggle()
     {
-        $this->status = !$this->status;
+        $this->brightness += 2;
     }
 }

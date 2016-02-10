@@ -18,43 +18,41 @@ class LightTest extends \PHPUnit_Framework_TestCase
         $this->light = new Light();
     }
 
-    public function test_init_status_is_light_off()
+    public function test_init_brightness()
     {
-        $this->assertFalse($this->light->isOn());
-        $this->assertTrue($this->light->isOff());
+        $this->assertSame(0, $this->light->getBrightness());
     }
 
     public function test_turn_light_on()
     {
         $this->light->turnOn();
 
-        $this->assertTrue($this->light->isOn());
-        $this->assertFalse($this->light->isOff());
+        $this->assertEquals(1, $this->light->getBrightness());
     }
 
     public function test_turn_light_off()
     {
         $this->light->turnOn();
 
-        $this->assertTrue($this->light->isOn());
-        $this->assertFalse($this->light->isOff());
+        $this->assertEquals(1, $this->light->getBrightness());
 
         $this->light->turnOff();
 
-        $this->assertFalse($this->light->isOn());
-        $this->assertTrue($this->light->isOff());
+        $this->assertEquals(0, $this->light->getBrightness());
+
+        $this->light->turnOff();
+
+        $this->assertEquals(0, $this->light->getBrightness());
     }
 
     public function test_toggle_light()
     {
         $this->light->toggle();
 
-        $this->assertTrue($this->light->isOn());
-        $this->assertFalse($this->light->isOff());
+        $this->assertEquals(2, $this->light->getBrightness());
 
         $this->light->toggle();
 
-        $this->assertFalse($this->light->isOn());
-        $this->assertTrue($this->light->isOff());
+        $this->assertEquals(4, $this->light->getBrightness());
     }
 }
