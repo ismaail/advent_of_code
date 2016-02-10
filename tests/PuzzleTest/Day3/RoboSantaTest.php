@@ -24,9 +24,6 @@ class RoboSantaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $this->roboSanta->getPositionY(), 'Wrong Y position');
     }
 
-    /**
-     * @group failing
-     */
     public function test_move_north()
     {
         $this->roboSanta->moveNorth();
