@@ -41,10 +41,8 @@ class LightGrid extends BaseGrid
      * @param string $offset
      *
      * @return Light
-     *
-     * @todo PHPCS Fix method name
      */
-    public function offsetGetorCreate($offset)
+    public function offsetGetOrCreate($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->offsetGet($offset);
@@ -69,7 +67,7 @@ class LightGrid extends BaseGrid
 
         for ($i = $start[0]; $i <= $end[0]; $i++) {
             for ($j = $start[1]; $j <= $end[1]; $j++) {
-                $light = $this->offsetGetorCreate(sprintf('%d,%d', $i, $j));
+                $light = $this->offsetGetOrCreate(sprintf('%d,%d', $i, $j));
                 $this->activate($light, $lightAction);
             }
         }

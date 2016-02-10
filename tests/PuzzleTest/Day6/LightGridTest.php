@@ -83,7 +83,7 @@ class LightGridTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $this->grid);
 
-        $value = $this->grid->offsetGetorCreate('0,0');
+        $value = $this->grid->offsetGetOrCreate('0,0');
 
         $this->assertInstanceOf(Light::class, $value);
     }
@@ -92,7 +92,7 @@ class LightGridTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty($this->grid);
 
-        $value = $this->grid->offsetGetorCreate('0,0');
+        $value = $this->grid->offsetGetOrCreate('0,0');
 
         $this->assertInstanceOf(Light::class, $value);
     }
