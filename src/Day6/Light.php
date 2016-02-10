@@ -9,27 +9,6 @@ namespace Puzzle\Day6;
 class Light
 {
     /**
-     * @const bool
-     *
-     * @deprecated  Light Status no longer used.
-     */
-    const STATUS_OFF = false;
-
-    /**
-     * @const bool
-     *
-     * @deprecated  Light Status no longer used.
-     */
-    const STATUS_ON = true;
-
-    /**
-     * @var int
-     *
-     * @deprecated  Light Status no longer used.
-     */
-    private $status = self::STATUS_OFF;
-
-    /**
      * @var int
      */
     private $brightness = 0;
@@ -40,26 +19,6 @@ class Light
     public function getBrightness()
     {
         return $this->brightness;
-    }
-
-    /**
-     * @return bool
-     *
-     * @deprecated  Light Status no longer used.
-     */
-    public function isOn()
-    {
-        return ($this->status === self::STATUS_ON);
-    }
-
-    /**
-     * @return bool
-     *
-     * @deprecated  Light Status no longer used.
-     */
-    public function isOff()
-    {
-        return ($this->status === self::STATUS_OFF);
     }
 
     /**
