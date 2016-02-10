@@ -65,7 +65,7 @@ class LightGrid extends BaseGrid
             throw new \InvalidArgumentException('Start position is expected to be smaller than the end position.');
         }
 
-        for ($i = $start[0]; $i <= $end[0] ; $i++) {
+        for ($i = $start[0]; $i <= $end[0]; $i++) {
             for ($j = $start[1]; $j <= $end[1]; $j++) {
                 $light = $this->offsetGetorCreate(sprintf('%d,%d', $i, $j));
                 $this->activate($light, $lightAction);

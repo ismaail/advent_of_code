@@ -13,6 +13,11 @@ class Play implements Playable
 {
     use FileRead;
 
+    /**
+     * @return string
+     *
+     * @throws \Exception
+     */
     public function play()
     {
         $lightGrid = new LightGrid();
