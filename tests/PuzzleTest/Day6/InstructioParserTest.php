@@ -85,6 +85,7 @@ EOF;
     {
         $source = <<<EOF
 turn on 0,0 through 1,1
+turn on 0,0 through 1,1
 
 EOF;
 
@@ -100,8 +101,7 @@ EOF;
 
         /** @var Light $light */
         foreach ($lightGrid as $light) {
-            $this->assertTrue($light->isOn());
-            $this->assertFalse($light->isOff());
+            $this->assertEquals(2, $light->getBrightness());
         }
     }
 
@@ -109,6 +109,7 @@ EOF;
     {
         $source = <<<EOF
 turn on 0,0 through 2,2
+turn off 1,1 through 2,2
 turn off 1,1 through 2,2
 
 EOF;
@@ -120,28 +121,17 @@ EOF;
         $this->assertCount(9, $lightGrid);
 
         // Assert Light ON
-        $this->assertTrue($lightGrid['0,0']->isOn());
-        $this->assertFalse($lightGrid['0,0']->isOff());
-        $this->assertTrue($lightGrid['0,1']->isOn());
-        $this->assertFalse($lightGrid['0,1']->isOff());
-        $this->assertTrue($lightGrid['0,2']->isOn());
-        $this->assertFalse($lightGrid['0,2']->isOff());
-        $this->assertTrue($lightGrid['1,0']->isOn());
-        $this->assertFalse($lightGrid['1,0']->isOff());
-        $this->assertTrue($lightGrid['2,0']->isOn());
-        $this->assertFalse($lightGrid['2,0']->isOff());
+        $this->assertEquals(1, $lightGrid['0,0']->getBrightness());
+        $this->assertEquals(1, $lightGrid['0,1']->getBrightness());
+        $this->assertEquals(1, $lightGrid['0,2']->getBrightness());
+        $this->assertEquals(1, $lightGrid['1,0']->getBrightness());
+        $this->assertEquals(1, $lightGrid['2,0']->getBrightness());
 
         // Assert Light OFF
-        $this->assertFalse($lightGrid['1,1']->isOn());
-        $this->assertTrue($lightGrid['1,1']->isOff());
-        $this->assertFalse($lightGrid['1,2']->isOn());
-        $this->assertTrue($lightGrid['1,2']->isOff());
-
-
-        $this->assertFalse($lightGrid['2,1']->isOn());
-        $this->assertTrue($lightGrid['2,1']->isOff());
-        $this->assertFalse($lightGrid['2,2']->isOn());
-        $this->assertTrue($lightGrid['2,2']->isOff());
+        $this->assertEquals(0, $lightGrid['1,1']->getBrightness());
+        $this->assertEquals(0, $lightGrid['1,2']->getBrightness());
+        $this->assertEquals(0, $lightGrid['2,1']->getBrightness());
+        $this->assertEquals(0, $lightGrid['2,2']->getBrightness());
     }
 
     public function test_parse_setup_lights_toggle()
@@ -159,27 +149,16 @@ EOF;
         $this->assertCount(9, $lightGrid);
 
         // Assert Light ON
-        $this->assertTrue($lightGrid['0,0']->isOn());
-        $this->assertFalse($lightGrid['0,0']->isOff());
-        $this->assertTrue($lightGrid['0,1']->isOn());
-        $this->assertFalse($lightGrid['0,1']->isOff());
-        $this->assertTrue($lightGrid['0,2']->isOn());
-        $this->assertFalse($lightGrid['0,2']->isOff());
-        $this->assertTrue($lightGrid['1,0']->isOn());
-        $this->assertFalse($lightGrid['1,0']->isOff());
-        $this->assertTrue($lightGrid['2,0']->isOn());
-        $this->assertFalse($lightGrid['2,0']->isOff());
+        $this->assertEquals(1, $lightGrid['0,0']->getBrightness());
+        $this->assertEquals(1, $lightGrid['0,1']->getBrightness());
+        $this->assertEquals(1, $lightGrid['0,2']->getBrightness());
+        $this->assertEquals(1, $lightGrid['1,0']->getBrightness());
+        $this->assertEquals(1, $lightGrid['2,0']->getBrightness());
 
         // Assert Light OFF
-        $this->assertFalse($lightGrid['1,1']->isOn());
-        $this->assertTrue($lightGrid['1,1']->isOff());
-        $this->assertFalse($lightGrid['1,2']->isOn());
-        $this->assertTrue($lightGrid['1,2']->isOff());
-
-
-        $this->assertFalse($lightGrid['2,1']->isOn());
-        $this->assertTrue($lightGrid['2,1']->isOff());
-        $this->assertFalse($lightGrid['2,2']->isOn());
-        $this->assertTrue($lightGrid['2,2']->isOff());
+        $this->assertEquals(3, $lightGrid['1,1']->getBrightness());
+        $this->assertEquals(3, $lightGrid['1,2']->getBrightness());
+        $this->assertEquals(3, $lightGrid['2,1']->getBrightness());
+        $this->assertEquals(3, $lightGrid['2,2']->getBrightness());
     }
 }
