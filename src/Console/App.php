@@ -43,9 +43,9 @@ class App extends Command
 
         $io = new SymfonyStyle($input, $output);
 
-        $result = $this->play($day);
-
         $io->title("Play day {$day}");
+
+        $result = $this->play($day);
         $io->success($result);
     }
 
