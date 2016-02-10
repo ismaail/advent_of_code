@@ -142,8 +142,7 @@ class LightGridTest extends \PHPUnit_Framework_TestCase
         $light = new Light();
         $reflectedMethod->invokeArgs($this->grid, [$light, 'turn on']);
 
-        $this->assertTrue($light->isOn());
-        $this->assertFalse($light->isOff());
+        $this->assertEquals(1, $light->getBrightness());
     }
 
     public function test_light_action_off()
@@ -154,8 +153,7 @@ class LightGridTest extends \PHPUnit_Framework_TestCase
         $light = new Light();
         $reflectedMethod->invokeArgs($this->grid, [$light, 'turn off']);
 
-        $this->assertFalse($light->isOn());
-        $this->assertTrue($light->isOff());
+        $this->assertEquals(0, $light->getBrightness());
     }
 
     public function test_light_action_toggle()
@@ -166,7 +164,7 @@ class LightGridTest extends \PHPUnit_Framework_TestCase
         $light = new Light();
         $reflectedMethod->invokeArgs($this->grid, [$light, 'toggle']);
 
-        $this->assertTrue($light->isOn());
-        $this->assertFalse($light->isOff());
+        $this->assertEquals(2, $light->getBrightness());
+
     }
 }
