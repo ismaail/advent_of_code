@@ -24,16 +24,6 @@ class Light
     private $status = self::STATUS_OFF;
 
     /**
-     * @var int
-     */
-    private $positionX = 0;
-
-    /**
-     * @var int
-     */
-    private $positionY = 0;
-
-    /**
      * @return bool
      */
     public function isOn()
@@ -71,21 +61,5 @@ class Light
     public function toggle()
     {
         $this->status = !$this->status;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPositionX()
-    {
-        return $this->positionX;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPositionY()
-    {
-        return $this->positionY;
     }
 }

@@ -57,10 +57,4 @@ class LightTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->light->isOn());
         $this->assertTrue($this->light->isOff());
     }
-
-    public function test_init_position()
-    {
-        $this->assertSame(0, $this->light->getPositionX());
-        $this->assertSame(0, $this->light->getPositionY());
-    }
 }
