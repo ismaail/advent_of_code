@@ -24,9 +24,6 @@ class SantaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $this->santa->getPositionY(), 'Wrong Y position');
     }
 
-    /**
-     * @group failing
-     */
     public function test_move_north()
     {
         $this->santa->moveNorth();
