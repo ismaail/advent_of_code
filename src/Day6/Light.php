@@ -10,21 +10,29 @@ class Light
 {
     /**
      * @const bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     const STATUS_OFF = false;
 
     /**
      * @const bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     const STATUS_ON = true;
 
     /**
      * @var int
+     *
+     * @deprecated  Light Status no longer used.
      */
     private $status = self::STATUS_OFF;
 
     /**
      * @return bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     public function isOn()
     {
@@ -33,6 +41,8 @@ class Light
 
     /**
      * @return bool
+     *
+     * @deprecated  Light Status no longer used.
      */
     public function isOff()
     {
