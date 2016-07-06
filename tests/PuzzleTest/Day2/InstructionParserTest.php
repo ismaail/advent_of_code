@@ -25,7 +25,7 @@ class InstructionParserTest extends \PHPUnit_Framework_TestCase
         $mock = $this
             ->getMockBuilder(\Puzzle\Day2\Present::class)
             ->disableOriginalConstructor()
-            ->setMethods(null)
+            ->setMethods(['getArea'])
             ->getMock()
         ;
 
@@ -99,7 +99,7 @@ EOF;
 
         $mock
             ->expects($this->never())
-            ->method('getARibbon')
+            ->method('getRibbon')
         ;
 
         $parser = new InstructionParser($mock);
